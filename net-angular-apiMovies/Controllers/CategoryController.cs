@@ -21,12 +21,19 @@ namespace net_angular_apiMovies.Controllers
             var data = _categoryRepository.GetAll();
             return Ok(data);
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var data = _categoryRepository.GetById(id);
-            return Ok(data);
+            var category = _categoryRepository.GetById(id);
+            if (category == null)
+            {
+                return NotFound(); // Ritorna una risposta 404 se la categoria non viene trovata
+            }
+
+            return Ok(category);
         }
+
+
         [HttpPost]
         public IActionResult AddUpdate(Category category)
         {

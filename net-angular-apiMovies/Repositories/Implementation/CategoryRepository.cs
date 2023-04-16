@@ -1,4 +1,5 @@
-﻿using net_angular_apiMovies.Models.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using net_angular_apiMovies.Models.Domain;
 using net_angular_apiMovies.Repositories.Abstract;
 
 namespace net_angular_apiMovies.Repositories.Implementation
@@ -61,7 +62,8 @@ namespace net_angular_apiMovies.Repositories.Implementation
 
         public Category GetById(int id)
         {
-            return _ctx.Categories.Find(id);
+            return _ctx.Categories.Include(c => c.Movies).FirstOrDefault(c => c.Id == id);
         }
+
     }
 }
