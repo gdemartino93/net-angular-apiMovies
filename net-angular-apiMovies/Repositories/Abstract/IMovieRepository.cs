@@ -7,6 +7,6 @@ namespace net_angular_apiMovies.Repositories.Abstract
         bool AddUpdate(Movie movie);
         bool Delete(int id);
         Movie GetById(int id);
-        IEnumerable<Movie> GetAll();
+        IEnumerable<Movie> GetAll(string term = "");
     }
 }

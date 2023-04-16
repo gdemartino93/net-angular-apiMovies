@@ -17,9 +17,9 @@ namespace net_angular_apiMovies.Controllers
             _movieRepository = movieRepository;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string term = "")
         {
-            var data = _movieRepository.GetAll();
+            var data = _movieRepository.GetAll(term);
             return Ok(data);
         }
         [HttpGet]

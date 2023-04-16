@@ -54,9 +54,15 @@ namespace net_angular_apiMovies.Repositories.Implementation
             }
         }
 
-        public IEnumerable<Movie> GetAll()
+        public IEnumerable<Movie> GetAll(string term)
         {
-           return _ctx.Movies.ToList();
+           term = term.ToLower(); //convertiamo in minuscolo la parola cercata
+           var data = (from movie in _ctx.Movies
+                       join
+                       category in _ctx.Categories
+                       on movie.Id equals category.Id
+                       where term == "" || movie.Title.StartsWith(term)).ToList();
+            return data;
         }
 
         public Movie GetById(int id)
