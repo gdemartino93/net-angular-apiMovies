@@ -61,7 +61,17 @@ namespace net_angular_apiMovies.Repositories.Implementation
                        join
                        category in _ctx.Categories
                        on movie.Id equals category.Id
-                       where term == "" || movie.Title.StartsWith(term)).ToList();
+                       where term == "" || movie.Title.StartsWith(term)
+                       
+                       select new Movie
+                       {
+                           Id = movie.Id,
+                           Title = movie.Title,
+                           CategoryId = category.Id,
+                           Description = movie.Description,
+                           Vote = movie.Vote,
+                       }
+                       ).ToList();
             return data;
         }
 

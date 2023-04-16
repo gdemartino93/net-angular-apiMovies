@@ -11,9 +11,9 @@ namespace net_angular_apiMovies.Models.Domain
         public string Description { get; set; }
         public int? Vote { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
+        [NotMapped] // non mapperà category name nel db
+        public string? CategoryName { get; set; }
 
     }
 }

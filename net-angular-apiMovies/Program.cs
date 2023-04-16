@@ -18,6 +18,8 @@ namespace net_angular_apiMovies
 
             //resolve dependencies
             builder.Services.AddTransient<IMovieRepository, MovieRepository>();
+            builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
