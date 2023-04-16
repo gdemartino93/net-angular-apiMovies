@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace net_angular_apiMovies.Models.Domain
 {
@@ -9,8 +10,10 @@ namespace net_angular_apiMovies.Models.Domain
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Vote { get; set; }
-        public int CategoryId { get; set; }
 
+        [ForeignKey("CategoryId")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
     }
 }
