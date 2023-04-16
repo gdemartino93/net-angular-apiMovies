@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using net_angular_apiMovies.Models.Domain;
+using net_angular_apiMovies.Repositories.Abstract;
+using net_angular_apiMovies.Repositories.Implementation;
 
 namespace net_angular_apiMovies
 {
@@ -14,6 +16,8 @@ namespace net_angular_apiMovies
 
             builder.Services.AddControllers();
 
+            //resolve dependencies
+            builder.Services.AddTransient<IMovieRepository, MovieRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
