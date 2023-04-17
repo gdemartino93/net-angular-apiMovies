@@ -56,28 +56,40 @@ namespace net_angular_apiMovies.Repositories.Implementation
 
         public IEnumerable<Movie> GetAll(string term)
         {
-           term = term.ToLower(); //convertiamo in minuscolo la parola cercata
-           var data = (from movie in _ctx.Movies
-                       join
-                       category in _ctx.Categories
-                       on movie.Id equals category.Id
-                       where term == "" || movie.Title.StartsWith(term)
-                       
-                       select new Movie
-                       {
-                           Id = movie.Id,
-                           Title = movie.Title,
-                           CategoryId = category.Id,
-                           Description = movie.Description,
-                           Vote = movie.Vote,
-                       }
-                       ).ToList();
+            term = term.ToLower();
+            var data = (from movie in _ctx.Movies
+                        join category in _ctx.Categories
+                        on movie.CategoryId equals category.Id
+                        where term == "" || movie.Title.StartsWith(term)
+                        select new Movie
+                        {
+                            Id = movie.Id,
+                            Title = movie.Title,
+                            CategoryId = movie.CategoryId,
+                            Description = movie.Description,
+                            Vote = movie.Vote,
+                            CategoryName = category.Name 
+                        }).ToList();
             return data;
         }
 
+
         public Movie GetById(int id)
         {
-            return _ctx.Movies.Find(id);
+            var movie = (from m in _ctx.Movies
+                         where m.Id == id
+                         join c in _ctx.Categories on m.CategoryId equals c.Id
+                         select new Movie
+                         {
+                             Id = m.Id,
+                             Title = m.Title,
+                             CategoryId = c.Id,
+                             CategoryName = c.Name,
+                             Description = m.Description,
+                             Vote = m.Vote,
+                         }).FirstOrDefault();
+
+            return movie;
         }
     }
 }

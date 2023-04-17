@@ -22,7 +22,7 @@ namespace net_angular_apiMovies.Controllers
             var data = _movieRepository.GetAll(term);
             return Ok(data);
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var data = _movieRepository.GetById(id);
@@ -48,7 +48,7 @@ namespace net_angular_apiMovies.Controllers
                 StatusCode = data ? 1 : 0,
                 Message = data ? "Film eliminato" : "C'è stato un errore"
             };
-            return Ok(data);
+            return Ok(status);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace net_angular_apiMovies.Repositories.Implementation
 
         public Category GetById(int id)
         {
-            return _ctx.Categories.Include(c => c.Movies).FirstOrDefault(c => c.Id == id);
+            return _ctx.Categories.Include(c => c.Movies).FirstOrDefault(c => c.Id == id); //ci ritorna la categoria cercata, con tutti i film associati
         }
 
     }

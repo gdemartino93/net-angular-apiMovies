@@ -48,8 +48,14 @@ namespace net_angular_apiMovies.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+
             var data = _categoryRepository.Delete(id);
-            return Ok(data);
+            var status = new Status
+            {
+                StatusCode = data ? 1 : 0,
+                Message = data ? "Categoria Eliminata" : "Non è possibile eliminare la categoria"
+            };
+            return Ok(status);
         }
     }
 }
