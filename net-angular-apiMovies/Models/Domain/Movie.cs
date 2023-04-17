@@ -14,6 +14,7 @@ namespace net_angular_apiMovies.Models.Domain
         public int? CategoryId { get; set; }
         [NotMapped] // non mapperà category name nel db
         public string? CategoryName { get; set; }
+        
 
     }
 }

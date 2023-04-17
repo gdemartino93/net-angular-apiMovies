@@ -47,7 +47,7 @@ namespace net_angular_apiMovies.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -70,13 +70,9 @@ namespace net_angular_apiMovies.Migrations
 
             modelBuilder.Entity("net_angular_apiMovies.Models.Domain.Movie", b =>
                 {
-                    b.HasOne("net_angular_apiMovies.Models.Domain.Category", "Category")
+                    b.HasOne("net_angular_apiMovies.Models.Domain.Category", null)
                         .WithMany("Movies")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("net_angular_apiMovies.Models.Domain.Category", b =>
